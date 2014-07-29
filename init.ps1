@@ -1,5 +1,5 @@
 #TODO: store pw encripted
-NET USER AutoUser "SomePassword2014" /ADD
+NET USER AutoUser "SomePass2014" /ADD
 NET LOCALGROUP "Administrators" "AutoUser" /ADD
 
 # folder that is allowed to share between users
