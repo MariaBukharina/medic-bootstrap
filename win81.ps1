@@ -66,7 +66,7 @@ New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\C
 # Enable JavaScript to show license window
 regsvr32 jscript.dll
 # Enable cookies
-New-ItemProperty -Path 'registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3' -Name 1A10 -Value 1
+Set-ItemProperty -Path 'registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3' -Name 1A10 -Value 1
 
 shutdown /r
 
