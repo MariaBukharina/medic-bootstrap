@@ -99,8 +99,10 @@ if ( $content -match "http://localcouchdb:5984" ) {
     Write-Host "config.json wasn't updated"
 }
 
-$argList = $("start " + $buildbotDir + $masterName)
-Start-Process -FilePath buildbot -ArgumentList $argList
+'$argList = "start ' + $buildbotDir + $masterName + ' "
+Start-Process -FilePath buildbot -ArgumentList $argList' > $($buildbotDir + "startMaster.ps1")
+
+New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run -Name BuildbotMaster -Value 'powershell $buildbotDir + "startMaster.ps1"'
 
 #Adding firewall rules
 New-NetFirewallRule -DisplayName “Apache CouchDB” -Direction Inbound –LocalPort 5984 -Protocol TCP -Action Allow
