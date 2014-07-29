@@ -34,8 +34,8 @@ Write-Host ""
 
 #SDKs and VS install section
 
-choco install VisualStudioExpress2013Windows
-choco install VS2013.2
+#choco install VisualStudioExpress2013Windows
+#choco install VS2013.2
 
 choco install jdk8
 
