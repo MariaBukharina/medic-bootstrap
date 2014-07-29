@@ -19,7 +19,7 @@ Start-Process -FilePath buildslave -ArgumentList $argList' > $($buildbotDir + "s
 
 icacls $buildbotDir  /grant:r AutoUser:F /T
 
-$StartUpValue = "powershell " + $buildbotDir + "start.ps1"
+$StartUpValue = "powershell -ExecutionPolicy Unrestricted " + $buildbotDir + "start.ps1"
 New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run -Name Buildbot -Value $StartUpValue
 
 if($args[0] -eq "windows81") {

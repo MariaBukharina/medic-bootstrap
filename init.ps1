@@ -24,7 +24,8 @@ git clone "https://github.com/akvelon/medic-bootstrap.git" "C:\mytemp\medic-boot
 
 Set-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -Value 0
 
-$val = $("powershell C:\mytemp\medic-bootstrap\autologon.ps1 " + $platformName)
+# Unresticted (or less?) is necessary with windows80 parameter for Windows Server 2012
+$val = $("powershell -ExecutionPolicy Unrestricted C:\mytemp\medic-bootstrap\autologon.ps1 " + $platformName)
 New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce -Name Installer -Value $val
 
 shutdown /r

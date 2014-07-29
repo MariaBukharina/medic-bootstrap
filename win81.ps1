@@ -67,7 +67,7 @@ $env:Path += ";C:\Users\"+[Environment]::UserName+"\AppData\Roaming\npm"
 
 Install-WindowsFeature Desktop-Experience
 
-$runValue = $("powershell C:\mytemp\medic-bootstrap\final.ps1 " + $args[0])
+$runValue = $("powershell -ExecutionPolicy Unrestricted C:\mytemp\medic-bootstrap\final.ps1 " + $args[0])
 New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce -Name Installer -Value $runValue
 
 # Enable JavaScript to show license window
