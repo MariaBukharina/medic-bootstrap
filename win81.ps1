@@ -34,19 +34,24 @@ Write-Host ""
 
 #SDKs and VS install section
 
-#choco install VisualStudioExpress2013Windows
-#choco install VS2013.2
+if($args[0]=="windows81") {
+    #choco install VisualStudioExpress2013Windows
+    #choco install VS2013.2
 
-choco install jdk8
+    choco install jdk8
 
-choco install ant
+    choco install ant
 
-choco install android-sdk
-Write-Host "Updating Android SDK PATH ..."
-$oldPath=(Get-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment" -Name PATH).Path
-$newPath=$oldPath+";C:\Users\"+[Environment]::UserName+"\AppData\Local\Android\android-sdk\tools"
-#Next line will fail w/o Administrator privileges
-Set-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment" -Name PATH –Value $newPath
+    choco install android-sdk
+    Write-Host "Updating Android SDK PATH ..."
+    $oldPath=(Get-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment" -Name PATH).Path
+    $newPath=$oldPath+";C:\Users\"+[Environment]::UserName+"\AppData\Local\Android\android-sdk\tools"
+    #Next line will fail w/o Administrator privileges
+    Set-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment" -Name PATH –Value $newPath
+} else if($args[0] == "windows80") {
+    choco install VisualStudioExpress2012Windows8
+    choco install VisualStudioExpress2012WindowsPhone
+}
 
 #Grunt-cli install section
 Write-Host "Installing Grunt-cli and dependencies ..."
@@ -60,7 +65,7 @@ $env:Path += ";C:\Users\"+[Environment]::UserName+"\AppData\Roaming\npm"
 
 Install-WindowsFeature Desktop-Experience
 
-$runValue = "powershell C:\mytemp\medic-bootstrap\final.ps1"
+$runValue = $("powershell C:\mytemp\medic-bootstrap\final.ps1 " + $args[0])
 New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce -Name Installer -Value $runValue
 
 # Enable JavaScript to show license window
