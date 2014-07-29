@@ -1,7 +1,7 @@
 $env:Path+=";C:\Users\"+[Environment]::UserName+"\AppData\Local\Android\android-sdk\tools\"
 
 $slaveAddr = "localhost:9889"
-$buildbotDir = "C:/bb/"
+$buildbotDir = "D:/bb/"
 $slaveName = "slv_win"
 
 android update sdk --no-ui --filter platform-tool
@@ -12,7 +12,7 @@ mkdir $buildbotDir
 $argList = $("create-slave " + $buildbotDir + $slaveName + " " + $slaveAddr + " windows-slave pass")
 Start-Process -FilePath buildslave -ArgumentList $argList -Wait
 
-'$argList = $("start " + $buildbotDir + $slaveName)
+'$argList = "start ' + $buildbotDir + $slaveName + ' "
 Start-Process -FilePath buildslave -ArgumentList $argList' > $($buildbotDir + "start.ps1")
 
 icacls $buildbotDir  /grant:r AutoUser:(OI)(CI)F
