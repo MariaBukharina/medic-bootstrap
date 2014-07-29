@@ -1,5 +1,7 @@
 $env:Path+=";C:\Users\"+[Environment]::UserName+"\AppData\Local\Android\android-sdk\tools\"
-android update sdk --no-ui --filter platform,platform-tool,tool
+android update sdk --no-ui --filter platform
+android update sdk --no-ui --filter platform-tool
+android update sdk --no-ui --filter tool
 android update sdk --no-ui --filter android-19
 Show-WindowsDeveloperLicenseRegistration
 Set-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -Value 1
