@@ -4,7 +4,6 @@ $slaveAddr = "localhost:9889"
 $buildbotDir = "C:/bb/"
 $slaveName = "slv_win"
 
-android update sdk --no-ui --filter platform
 android update sdk --no-ui --filter platform-tool
 android update sdk --no-ui --filter tool
 android update sdk --no-ui --filter android-19
