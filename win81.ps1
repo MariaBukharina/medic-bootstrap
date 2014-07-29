@@ -64,7 +64,8 @@ $runValue = "powershell C:\mytemp\medic-bootstrap\final.ps1"
 New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce -Name Installer -Value $runValue
 
 # Enable JavaScript to show license window
-regsvr32 jscript.dll
+Set-ItemProperty -Path 'registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3' -Name 1400 -Value 0
+#regsvr32 jscript.dll
 # Enable cookies
 Set-ItemProperty -Path 'registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3' -Name 1A10 -Value 1
 
