@@ -48,9 +48,11 @@ if($args[0]=="windows81") {
     $newPath=$oldPath+";C:\Users\"+[Environment]::UserName+"\AppData\Local\Android\android-sdk\tools"
     #Next line will fail w/o Administrator privileges
     Set-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment" -Name PATH –Value $newPath
-} else if($args[0] == "windows80") {
-    choco install VisualStudioExpress2012Windows8
-    choco install VisualStudioExpress2012WindowsPhone
+} else {
+    if($args[0] == "windows80") {
+        choco install VisualStudioExpress2012Windows8
+        choco install VisualStudioExpress2012WindowsPhone
+    }
 }
 
 #Grunt-cli install section
