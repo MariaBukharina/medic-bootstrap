@@ -30,3 +30,15 @@ After that you can encounter an EPERM error at Deploy steps. Run Command Prompt 
     
    This command gives all necessary permissions for user with userName for C:\bb folder.
  
+ 
+Alternative way
+===============
+
+1. Clone repo and upload init.ps1 on your machine
+2. Open init.ps1 and set $platformName that is necessary
+3. Run init.ps1 with PowerShell
+4. Wait for reboot
+5. Login as any user to your machine; Script should add AutoUser to autologon and reboot the machine
+6. Now wait while everythin is installing under autouser
+7. If you are installing "windows81" version, after some time (about 30 minutes) you have to login and accept licenses for Android SDK tools and get Windows Developer licence
+ 
