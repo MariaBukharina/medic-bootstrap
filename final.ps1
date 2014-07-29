@@ -4,7 +4,7 @@ $slaveAddr = "localhost:9889"
 $buildbotDir = "D:/bb/"
 $slaveName = "slv_win"
 
-if($args[0]=="windows81") {
+if($args[0] -eq "windows81") {
     android update sdk --no-ui --filter platform-tool
     android update sdk --no-ui --filter tool
     android update sdk --no-ui --filter android-19
@@ -21,7 +21,7 @@ icacls $buildbotDir  /grant:r AutoUser:(OI)(CI)F
 
 New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run -Name Buildbot -Value 'powershell $buildbotDir + "start.ps1"'
 
-if($args[0]=="windows81") {
+if($args[0] -eq "windows81") {
     Show-WindowsDeveloperLicenseRegistration
 }
 Set-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -Value 1

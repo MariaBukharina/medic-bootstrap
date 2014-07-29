@@ -34,7 +34,7 @@ Write-Host ""
 
 #SDKs and VS install section
 
-if($args[0]=="windows81") {
+if($args[0] -eq "windows81") {
     #choco install VisualStudioExpress2013Windows
     #choco install VS2013.2
 
@@ -49,7 +49,7 @@ if($args[0]=="windows81") {
     #Next line will fail w/o Administrator privileges
     Set-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment" -Name PATH –Value $newPath
 } else {
-    if($args[0] == "windows80") {
+    if($args[0] -eq "windows80") {
         choco install VisualStudioExpress2012Windows8
         choco install VisualStudioExpress2012WindowsPhone
     }
