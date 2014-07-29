@@ -82,15 +82,20 @@ Write-Host ""
 $argList = $("clone $medicRepo -b $medicBranch " + $($env:TEMP + "\cordova-medic"))
 Start-Process -FilePath git -ArgumentList $argList -Wait
 
+git clone "https://github.com/akvelon/medic-bootstrap.git" $env:TEMP"\medic-bootstrap"
+
 mkdir $buildbotDir
 $argList = $("create-master " + $buildbotDir + $masterName)
 Start-Process -FilePath buildbot -ArgumentList $argList -Wait
 
-copy $($env:TEMP + "\cordova-medic\master.cfg") $($buildbotDir + $masterName + "\master.cfg")
-copy $($env:TEMP + "\cordova-medic\repos.json") $($buildbotDir + "repos.json")
-copy $($env:TEMP + "\cordova-medic\config.json.sample-windows") $($buildbotDir + "config.json")
+#copy $($env:TEMP + "\cordova-medic\master.cfg") $($buildbotDir + $masterName + "\master.cfg")
+#copy $($env:TEMP + "\cordova-medic\repos.json") $($buildbotDir + "repos.json")
+#copy $($env:TEMP + "\cordova-medic\config.json.sample-windows") $($buildbotDir + "config.json")
 
-#Update config.json
+copy $($env:TEMP + "\medic-bootstrap\master.cfg") $($buildbotDir + $masterName + "\master.cfg")
+copy $($env:TEMP + "\medic-bootstrap\repos.json") $($buildbotDir + "repos.json")
+copy $($env:TEMP + "\medic-bootstrap\config.json") $($buildbotDir + "config.json") #Update config.json
+
 $file = $($buildbotDir + "config.json")
 $content = Get-Content $file
 if ( $content -match "http://localcouchdb:5984" ) {
@@ -102,7 +107,8 @@ if ( $content -match "http://localcouchdb:5984" ) {
 '$argList = "start ' + $buildbotDir + $masterName + ' "
 Start-Process -FilePath buildbot -ArgumentList $argList' > $($buildbotDir + "startMaster.ps1")
 
-New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run -Name BuildbotMaster -Value 'powershell $buildbotDir + "startMaster.ps1"'
+$StartUpValue = "powershell " + $buildbotDir + "startMaster.ps1"
+New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run -Name BuildbotMaster -Value $StartUpValue
 
 #Adding firewall rules
 New-NetFirewallRule -DisplayName “Apache CouchDB” -Direction Inbound –LocalPort 5984 -Protocol TCP -Action Allow
