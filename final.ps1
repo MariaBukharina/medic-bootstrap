@@ -19,7 +19,8 @@ Start-Process -FilePath buildslave -ArgumentList $argList' > $($buildbotDir + "s
 
 icacls $buildbotDir  /grant:r AutoUser:(OI)(CI)F
 
-New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run -Name Buildbot -Value 'powershell $buildbotDir + "start.ps1"'
+$StartUpValue = "powershell " + $buildbotDir + "start.ps1"
+New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run -Name Buildbot -Value $StartUpValue
 
 if($args[0] -eq "windows81") {
     Show-WindowsDeveloperLicenseRegistration
