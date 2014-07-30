@@ -23,6 +23,11 @@ $env:Path+=";C:\Program Files (x86)\Git\cmd;C:\Program Files (x86)\Git\bin"
 
 git clone "https://github.com/akvelon/medic-bootstrap.git" "C:\mytemp\medic-bootstrap"
 
+# Creating user for running store apps
+$config = (Get-Content C:\mytemp\medic-bootstrap\config.json) -join "`n" | ConvertFrom-Json
+NET USER $config.windows8.user $config.windows8.pass /ADD
+ 
+
 Set-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\policies\system -Name EnableLUA -Value 0
 
 New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name AutoAdminLogon -Value 1
