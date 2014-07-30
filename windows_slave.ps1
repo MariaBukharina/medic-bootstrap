@@ -70,11 +70,8 @@ Install-WindowsFeature Desktop-Experience
 $runValue = $("powershell -ExecutionPolicy Unrestricted C:\mytemp\medic-bootstrap\final.ps1 " + $args[0])
 New-ItemProperty -Path registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce -Name Installer -Value $runValue
 
-# Enable JavaScript to show license window
-Set-ItemProperty -Path 'registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3' -Name 1400 -Value 0
-#regsvr32 jscript.dll
-# Enable cookies
-Set-ItemProperty -Path 'registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3' -Name 1A10 -Value 1
+# Disable hyperprotective IE policy to make Developer License Registration window available
+Set-ItemProperty -Path "registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}" -Name IsInstalled -Value 0
 
 shutdown /r
 
