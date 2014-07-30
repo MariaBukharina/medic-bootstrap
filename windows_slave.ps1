@@ -1,5 +1,6 @@
 echo $env:USERNAME
 $wc = New-Object System.Net.WebClient
+$certificatePath = "C:\mytemp\medic-bootstrap\CordovaApp.Store_0.0.2.0_AnyCPU_Debug.cer"
 
 #Installing nodejs; Chocolatey cannot install it successfully under SYSTEM account
 # so we have to do it explicitly
@@ -48,6 +49,8 @@ if($args[0] -eq "windows81") {
     $newPath=$oldPath+";C:\Users\"+[Environment]::UserName+"\AppData\Local\Android\android-sdk\tools"
     #Next line will fail w/o Administrator privileges
     Set-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment" -Name PATH –Value $newPath
+    
+    certutil.exe -addstore TrustedPeople $certificatePath
 } else {
     if($args[0] -eq "windows80") {
         choco install VisualStudioExpress2012Windows8
