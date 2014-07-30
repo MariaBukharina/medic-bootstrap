@@ -73,7 +73,7 @@
         {
             "category": "PLATFORM",
             "current": "master",
-            "release": "master",
+            "release": "RELEASE",
             "repo": "https://git-wip-us.apache.org/repos/asf/cordova-windows.git",
             "title": "WINDOWS8"
         },
@@ -293,7 +293,7 @@
         },
         {
             "branch": "master",
-            "builder": ["Windows8", "Windows8_vs2012"],
+            "builder": ["Windows8", "Windows8 (VS2012)"],
             "categories": [
                 "WINDOWS8"
             ],
